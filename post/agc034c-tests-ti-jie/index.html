@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>[AGC034C] Tests 题解 | yehaodee | gjzhtar ah</title>
+<meta name="description" content="iskanmi rahworl">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://yehaodee.github.io/favicon.ico?v=1676286756741">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://yehaodee.github.io/styles/main.css">
+
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://yehaodee.github.io">yehaodee | gjzhtar ah</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>[AGC034C] Tests 题解</h1>
+            <p class="article-meta">
+              2023-02-06
+              
+                <a href="https://yehaodee.github.io/tag/BQBUM8Bbd/" class="badge warning">
+                  贪心
+                </a>
+              
+                <a href="https://yehaodee.github.io/tag/L0i9v2XD1/" class="badge secondary">
+                  题解
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <p>设原式 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>=</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">=T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span><br>
+显然我们考虑在 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span> 确定时要让 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span> 最大，所以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub><mo>≤</mo><msub><mi>b</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">a_i\le b_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7859700000000001em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 时 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>c</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">c_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 选择 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>l</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">l_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.01968em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，否则选择 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>r</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">r_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 。我们观察另一个性质，当同时存在 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i, j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span> 使得 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>a</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">a_i, a_j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.716668em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 均不为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 或 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span>，我们可以通过调整使某一方减一，另一方加一，可以发现这样调整不劣。也就是说，有且只有一个数<br>
+可能不为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 或 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span>。<br>
+考虑二分 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span>，那么会有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mo>÷</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">s \div x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>，以及一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mtext> </mtext><mi mathvariant="normal">%</mi><mtext> </mtext><mi>x</mi></mrow><annotation encoding="application/x-tex">s\ \%\ x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.80556em;vertical-align:-0.05556em;"></span><span class="mord mathdefault">s</span><span class="mspace"> </span><span class="mord">%</span><span class="mspace"> </span><span class="mord mathdefault">x</span></span></span></span> ，贪心地对 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>b</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">b_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 到 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span> 的增量顺序排序。然后枚举将哪一位变为特殊位，检查 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 合法性。</p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://yehaodee.github.io/post/yi-xie-zi-ji-zong-jie-de-tao-lu/">
+                <h3 class="post-title">
+                  一些自己总结的套路
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://yehaodee.github.io/images/avatar.png?v=1676286756741" class="no-responsive avatar">
+    <div class="text-muted">iskanmi rahworl</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://yehaodee.github.io/post/tu-lun/">图论</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://yehaodee.github.io/post/zi-fu-chuan/">字符串</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://yehaodee.github.io/post/cf1545d-aquamoon-and-wrong-coordinate/">[CF1545D] AquaMoon and Wrong Coordinate 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://yehaodee.github.io/post/agc034c-tests-ti-jie/">[AGC034C] Tests 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://yehaodee.github.io/post/yi-xie-zi-ji-zong-jie-de-tao-lu/">一些自己总结的套路</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://yehaodee.github.io/tag/rW65tyIFi/" class="badge warning">
+          图论
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/uqayQsb_f/" class="badge success">
+          笔记
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/GngmW556N/" class="badge ">
+          字符串
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/kqMlv-Uuo/" class="badge secondary">
+          构造
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/rF1UOx-CQ/" class="badge secondary">
+          数学
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/L0i9v2XD1/" class="badge ">
+          题解
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/BQBUM8Bbd/" class="badge ">
+          贪心
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://yehaodee.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>[CF1545D] AquaMoon and Wrong Coordinate 题解 | yehaodee | gjzhtar ah</title>
+<meta name="description" content="iskanmi rahworl">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://yehaodee.github.io/favicon.ico?v=1676286756741">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://yehaodee.github.io/styles/main.css">
+
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://yehaodee.github.io">yehaodee | gjzhtar ah</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>[CF1545D] AquaMoon and Wrong Coordinate 题解</h1>
+            <p class="article-meta">
+              2023-02-13
+              
+                <a href="https://yehaodee.github.io/tag/kqMlv-Uuo/" class="badge secondary">
+                  构造
+                </a>
+              
+                <a href="https://yehaodee.github.io/tag/rF1UOx-CQ/" class="badge secondary">
+                  数学
+                </a>
+              
+                <a href="https://yehaodee.github.io/tag/L0i9v2XD1/" class="badge secondary">
+                  题解
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <h3 id="textdescription"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>Description</mtext></mrow><annotation encoding="application/x-tex">\text{Description}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord text"><span class="mord">Description</span></span></span></span></span></h3>
+<p>有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 个人站在一根数轴的正半轴的整点上，他们准备向数轴正方向运动。每个人的运动速度都是整数。</p>
+<p>现在记录了他们 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>∼</mo><mi>k</mi><mi mathvariant="normal">−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">0∼k−1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord">−</span><span class="mord">1</span></span></span></span> 时刻的坐标集合（即顺序有可能被打乱）共 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mi>k</mi></mrow><annotation encoding="application/x-tex">nk</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 个数，其中有一个数被修改成了任意值，你需要找出这个数位于哪一个时刻的坐标集合，和它原来应当是什么。第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 时刻不会被修改。</p>
+<h3 id="textsolution"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>Solution</mtext></mrow><annotation encoding="application/x-tex">\text{Solution}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord text"><span class="mord">Solution</span></span></span></span></span></h3>
+<p>考虑到每个时刻的点都被打乱了顺序，所以需要找到一种不关乎顺序的方式判断是否合法。</p>
+<p>可以想到，通过 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\sum x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span></span></span></span> 的差分可以判断被修改的位置在哪一时刻（因为没被修改的行之间差分相同）。此时我们只要枚举并判断是哪一位置被修改。判断的方法类似，不过我们考虑的是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sum x^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064118em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>。</p>
+<p>设 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>g</mi><mi>i</mi></msub><mo>=</mo><mo>∑</mo><msubsup><mi>x</mi><mi>i</mi><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">g_i=\sum x_i^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.072772em;vertical-align:-0.258664em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-2.441336em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.258664em;"><span></span></span></span></span></span></span></span></span></span>，则 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>g</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>g</mi><mi>i</mi></msub><mo>=</mo><mn>2</mn><mo>∑</mo><msub><mi>x</mi><mi>i</mi></msub><mi>v</mi><mo>+</mo><mo>∑</mo><msup><mi>v</mi><mn>2</mn></msup><mo separator="true">,</mo><msub><mi>g</mi><mi>i</mi></msub><mo>−</mo><msub><mi>g</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>=</mo><mn>2</mn><mo>∑</mo><msub><mi>x</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mi>v</mi><mo>+</mo><mo>∑</mo><msup><mi>v</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">g_{i+1}-g_i=2\sum x_i v+\sum v^2,g_i-g_{i-1}=2\sum x_{i-1} v+\sum v^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.791661em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064118em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.638891em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064118em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>g</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>g</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>−</mo><mn>2</mn><msub><mi>g</mi><mi>i</mi></msub><mo>=</mo><mn>2</mn><mo>∑</mo><msup><mi>v</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">g_{i+1}+g_{i-1}-2g_i=2\sum v^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.791661em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.791661em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">2</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.064118em;vertical-align:-0.25001em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> 是个定值。通过修改每一位（已经提前求出正确的每一行总和，所以修改的增量是固定的），判断是否为给定定值即可。</p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://yehaodee.github.io/post/agc034c-tests-ti-jie/">
+                <h3 class="post-title">
+                  [AGC034C] Tests 题解
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://yehaodee.github.io/images/avatar.png?v=1676286756741" class="no-responsive avatar">
+    <div class="text-muted">iskanmi rahworl</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://yehaodee.github.io/post/tu-lun/">图论</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://yehaodee.github.io/post/zi-fu-chuan/">字符串</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://yehaodee.github.io/post/cf1545d-aquamoon-and-wrong-coordinate/">[CF1545D] AquaMoon and Wrong Coordinate 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://yehaodee.github.io/post/agc034c-tests-ti-jie/">[AGC034C] Tests 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://yehaodee.github.io/post/yi-xie-zi-ji-zong-jie-de-tao-lu/">一些自己总结的套路</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://yehaodee.github.io/tag/rW65tyIFi/" class="badge secondary">
+          图论
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/uqayQsb_f/" class="badge secondary">
+          笔记
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/GngmW556N/" class="badge secondary">
+          字符串
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/kqMlv-Uuo/" class="badge warning">
+          构造
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/rF1UOx-CQ/" class="badge ">
+          数学
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/L0i9v2XD1/" class="badge secondary">
+          题解
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/BQBUM8Bbd/" class="badge warning">
+          贪心
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://yehaodee.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

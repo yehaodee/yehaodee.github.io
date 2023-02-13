@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>图论 | yehaodee | gjzhtar ah</title>
+<meta name="description" content="iskanmi rahworl">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://yehaodee.github.io/favicon.ico?v=1676286756741">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://yehaodee.github.io/styles/main.css">
+
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://yehaodee.github.io">yehaodee | gjzhtar ah</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>图论</h1>
+            <p class="article-meta">
+              2023-02-13
+              
+                <a href="https://yehaodee.github.io/tag/rW65tyIFi/" class="badge secondary">
+                  图论
+                </a>
+              
+                <a href="https://yehaodee.github.io/tag/uqayQsb_f/" class="badge warning">
+                  笔记
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <h2 id="网络流">网络流</h2>
+<ol>
+<li>退流</li>
+</ol>
+<p>常用于判断割边，求割边集。</p>
+<p>判断一条边是否为割边，显然就是从该边的入点无法到达出点（当然不走流量为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 的边），代码实现上只需要调用一遍 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>dinic</mtext></mrow><annotation encoding="application/x-tex">\text{dinic}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord text"><span class="mord">dinic</span></span></span></span></span> 中的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>bfs</mtext></mrow><annotation encoding="application/x-tex">\text{bfs}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord text"><span class="mord">bfs</span></span></span></span></span> 函数即可。而强制钦定他为割边只需要将所有边复原后，删除这条边（将它和它的反向边流量都置为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 即可），再重新跑一遍 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 到 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span> 的最小割用以得到新图的最小割即可。</p>
+<pre><code class="language-cpp">if (e[eid].c == 0 &amp;&amp; !bfs(u, v)) {
+  while (bfs(u, S)) { for (int i = 1; i &lt;= T; i++) cur[i] = head[i]; dfs(u, 1e9, S); }
+  while (bfs(T, v)) { for (int i = 1; i &lt;= T; i++) cur[i] = head[i]; dfs(T, 1e9, v); }
+  e[eid].c = e[eid ^ 1].c = 0;  
+}
+</code></pre>
+<h2 id="差分约束">差分约束</h2>
+<ol>
+<li>如果不等式中为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>&gt;</mo><mi>k</mi><mo>×</mo><msub><mi>x</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">x_1&gt;k\times x_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6891em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 形式，考虑两边同时取 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\log</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span></span></span></span>。</li>
+</ol>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>log</mi><mo>⁡</mo><mn>2</mn></msub><mo>(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>)</mo><mo>&gt;</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo>(</mo><mi>k</mi><mo>)</mo><mo>+</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo>(</mo><msub><mi>x</mi><mn>2</mn></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">\log_2(x_1)&gt;log_2(k)+log_2(x_2)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.20696799999999996em;"><span style="top:-2.4558600000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24414em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>跑普通加法最短 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">/</mi></mrow><annotation encoding="application/x-tex">/</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">/</span></span></span></span> 最长路即可</p>
+<h2 id="优化建图">优化建图</h2>
+<ol>
+<li>边重定向</li>
+</ol>
+<p>记 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>d(x)</mtext></mrow><annotation encoding="application/x-tex">\text{d(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">d(x)</span></span></span></span></span> 为无向图点度数，建立新有向图， <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>d(y)</mtext><mo>&lt;</mo><mtext>d(x)</mtext></mrow><annotation encoding="application/x-tex">\text{d(y)}\lt\text{d(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">d(y)</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">d(x)</span></span></span></span></span> 则 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 向 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span> 连边，若度数相等则按编号大小连边，大的连向小的。</p>
+<p>性质：新图所有点度数和为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>m</mi><msqrt><mi>m</mi></msqrt><mo>)</mo></mrow><annotation encoding="application/x-tex">O(m\sqrt m)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.05028em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">m</span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8002800000000001em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault" style="padding-left:0.833em;">m</span></span><span style="top:-2.76028em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,
+-10,-9.5,-14c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54c44.2,-33.3,65.8,
+-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10s173,378,173,378c0.7,0,
+35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429c69,-144,104.5,-217.7,106.5,
+-221c5.3,-9.3,12,-14,20,-14H400000v40H845.2724s-225.272,467,-225.272,467
+s-235,486,-235,486c-2.7,4.7,-9,7,-19,7c-6,0,-10,-1,-12,-3s-194,-422,-194,-422
+s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.23972em;"><span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 级别，期中 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span> 为原图边数</p>
+<ol start="2">
+<li>线段树优化建图</li>
+</ol>
+<p>不过多解释，一般用于区间连接点 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">/</mi></mrow><annotation encoding="application/x-tex">/</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">/</span></span></span></span> 点连接区间 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">/</mi></mrow><annotation encoding="application/x-tex">/</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">/</span></span></span></span> 区间连接区间</p>
+<ol start="3">
+<li>前缀优化建图</li>
+</ol>
+<p>与上类似，只是用于点连向前缀 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">/</mi></mrow><annotation encoding="application/x-tex">/</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">/</span></span></span></span> 后缀，常用于点连接点集内其他的点</p>
+<p>最后建图如下</p>
+<figure data-type="image" tabindex="1"><img src="https://cdn.luogu.com.cn/upload/image_hosting/ypkhxjf2.png" alt="" loading="lazy"></figure>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://yehaodee.github.io/post/zi-fu-chuan/">
+                <h3 class="post-title">
+                  字符串
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://yehaodee.github.io/images/avatar.png?v=1676286756741" class="no-responsive avatar">
+    <div class="text-muted">iskanmi rahworl</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://yehaodee.github.io/post/tu-lun/">图论</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://yehaodee.github.io/post/zi-fu-chuan/">字符串</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://yehaodee.github.io/post/cf1545d-aquamoon-and-wrong-coordinate/">[CF1545D] AquaMoon and Wrong Coordinate 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://yehaodee.github.io/post/agc034c-tests-ti-jie/">[AGC034C] Tests 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://yehaodee.github.io/post/yi-xie-zi-ji-zong-jie-de-tao-lu/">一些自己总结的套路</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://yehaodee.github.io/tag/rW65tyIFi/" class="badge ">
+          图论
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/uqayQsb_f/" class="badge warning">
+          笔记
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/GngmW556N/" class="badge secondary">
+          字符串
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/kqMlv-Uuo/" class="badge success">
+          构造
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/rF1UOx-CQ/" class="badge ">
+          数学
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/L0i9v2XD1/" class="badge ">
+          题解
+        </a>
+      
+        <a href="https://yehaodee.github.io/tag/BQBUM8Bbd/" class="badge secondary">
+          贪心
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://yehaodee.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>
